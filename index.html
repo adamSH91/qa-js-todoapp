@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+        </script>
+        <title>JavaScript Tutorial - Working with JSON</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Javascript Todo App</h1>
+
+            <div class="row mt-4">
+                <div class="col-md-8">
+                    <ul id="todo-list">
+
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <form>
+                        <input type="text" class="form-control" id="todoTitle" placeholder="Todo title...">
+                        
+                        <button onclick="newTodo()" class="addBtn btn-sm btn-primary form-control mt-3">Add</button>
+                    </form>
+                    <button onclick="deleteAllTodos()" class="addBtn btn btn-sm btn-danger form-control mt-5">Delete All</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
