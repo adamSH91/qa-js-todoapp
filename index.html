@@ -29,4 +29,79 @@
             </div>
         </div>
     </body>
+    <script>
+        var json_data = JSON.parse(localStorage.getItem('json_data'));
+
+        if (json_data) {
+            json_data.forEach(element => {
+                if (element) {
+                    newTodo(element.title, element.id);
+                }
+            });
+        }
+        
+        registerEventListeners;
+
+        function registerEventListeners() {
+            $(".delete").on("click", function(){
+                var todoID = $(this).parent().attr('data-id');
+                deleteTodo(todoID);
+            });
+        }
+
+        function deleteTodo(todoID) {
+            $("li[data-id="+todoID+"]").slideUp();
+
+            var json_temp = JSON.parse(localStorage.getItem('json_data'));
+            delete json_temp[todoID];
+            localStorage.setItem('json_data', JSON.stringify(json_temp));
+        }
+
+        function newTodo(todoTitle, todoID) {
+            if (!todoTitle && !todoID) {
+                todoTitle = document.getElementById("todoTitle").value;
+
+                if (todoTitle) {
+                    var todoID = storeTodoLocal(todoTitle);
+                }
+            }
+
+            if (todoTitle) {
+                var todoHTML = '<li style="display:none" data-id="' + todoID + '">' + todoTitle + '<a href="#" class="btn btn-sm btn-danger m-1 delete">Delete</a></li>';
+
+                $("#todo-list").append(todoHTML);
+                $("li[data-id="+todoID+"]").fadeIn();
+                registerEventListeners();
+            }
+        }
+
+        function storeTodoLocal(todoTitle) {
+            var json_temp = JSON.parse(localStorage.getItem('json_data'));
+
+            if (!json_temp) {
+                json_temp = [];
+            }
+
+            var todoID = json_temp.length;
+
+            json_temp.push({
+                "id": todoID,
+                "title": todoTitle,
+                "completed": false
+            });
+
+            console.log(json_temp);
+
+            localStorage.setItem('json_data', JSON.stringify(json_temp));
+
+            return todoID;
+        }
+
+        function deleteAllTodos() {
+            if (confirm("Are you sure you want to delete all of your Todos?")) {
+                localStorage.removeItem('json_data');
+                $("#todo-list").empty();
+            }
+        }
+    </script>
 </html>
